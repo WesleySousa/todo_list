@@ -7,6 +7,7 @@ import 'dart:convert';
 void main() {
   runApp(MaterialApp(
     home: Home(),
+    debugShowCheckedModeBanner: false,
   ));
 }
 
@@ -20,7 +21,40 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('To Do List'),
+        backgroundColor: Colors.blueAccent,
+        centerTitle: true,
+      ),
+      body: Column(
+        children: <Widget>[
+          Container(
+            padding: EdgeInsets.fromLTRB(17.0, 1.0, 7.0, 1.0),
+            child: Row(
+              children: <Widget>[
+                Expanded(
+                  child: TextField(
+                    decoration: InputDecoration(
+                      labelText: 'New To Do',
+                      labelStyle: TextStyle(color: Colors.blueAccent),
+                    ),
+                  ),
+                ),
+                RaisedButton(
+                  color: Colors.blueAccent,
+                  child: Text(
+                    'ADD',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onPressed: () {},
+                ),
+              ],
+            ),
+          )
+        ],
+      ),
+    );
   }
 
   Future<File> _getFile() async {
