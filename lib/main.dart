@@ -47,7 +47,7 @@ class _HomeState extends State<Home> {
                 Expanded(
                   child: TextField(
                     decoration: InputDecoration(
-                      labelText: 'New To Do',
+                      labelText: 'New Task',
                       labelStyle: TextStyle(color: Colors.blueAccent),
                     ),
                     controller: _todoController,
