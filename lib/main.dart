@@ -20,6 +20,9 @@ class _HomeState extends State<Home> {
   final _todoController = TextEditingController();
   List _todoList = [];
 
+  Map<String, dynamic> _lastRemoved;
+  int _lastIndexRemoved;
+
   @override
   void initState() {
     super.initState();
@@ -107,6 +110,28 @@ class _HomeState extends State<Home> {
           });
         },
       ),
+      onDismissed: (direction) {
+        setState(() {
+          _lastRemoved = Map.from(_todoList[index]);
+          _lastIndexRemoved = index;
+          _todoList.removeAt(index);
+          _saveData();
+        });
+        final snackbar = SnackBar(
+          content: Text('Task \'${_lastRemoved['title']}\' removed'),
+          action: SnackBarAction(
+            label: 'Undo',
+            onPressed: () {
+              setState(() {
+                _todoList.insert(_lastIndexRemoved, _lastRemoved);
+                _saveData();
+              });
+            },
+          ),
+          duration: Duration(seconds: 2),
+        );
+        Scaffold.of(context).showSnackBar(snackbar);
+      },
     );
   }
 
